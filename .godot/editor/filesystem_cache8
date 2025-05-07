@@ -1,0 +1,8 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1746577560
+icon.svg::CompressedTexture2D::5994517747582292155::1746576408::1746576413::1::::<><>::
+Main.tscn::PackedScene::8215898747102228272::1746577484::0::1::::<><>::res://Main.gd
+Card.tscn::PackedScene::2849547563575485228::1746577485::0::1::::<><>::res://Card.gd
+Main.gd::GDScript::-1::1746577310::0::1::::<>Control<>::
+Card.gd::GDScript::-1::1746577394::0::1::::<>Control<>::
+Smiley1.png::CompressedTexture2D::7993295485809643349::1746577560::1746577560::1::::<><>::

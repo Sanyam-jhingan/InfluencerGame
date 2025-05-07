@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgulvqwap563y"]
+
+[ext_resource type="Script" path="res://Card.gd" id="1_aeaxc"]
+[ext_resource type="Texture2D" uid="uid://dl5an5ud2lmyn" path="res://Smiley1.png" id="2_hlw1k"]
+
+[node name="Card" type="Control"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.469
+anchor_right = 0.5
+anchor_bottom = 0.469
+offset_left = -16.0
+offset_top = -128.912
+offset_right = 24.0
+offset_bottom = -84.912
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_aeaxc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.325
+anchor_top = 1.0
+anchor_right = 0.325
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = 16.0
+offset_right = 54.0
+offset_bottom = 134.0
+texture = ExtResource("2_hlw1k")
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -60.0
+offset_top = -97.0
+offset_right = 73.0
+offset_bottom = -74.0
+text = "Dance Challenge!"
+
+[node name="DescLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -73.0
+offset_top = -37.0
+offset_right = 123.0
+offset_bottom = -14.0
+text = "Join the latest viral trend!"
+
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -45.0
+offset_top = 296.0
+offset_right = 75.0
+offset_bottom = 336.0
+
+[node name="AcceptButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Accept"
+
+[node name="RejectButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Reject"
