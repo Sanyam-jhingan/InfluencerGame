@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpb3wfyql7057"]
+[gd_scene load_steps=2 format=3 uid="uid://dpb3wfyql7057"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_yxygk"]
-[ext_resource type="PackedScene" uid="uid://bgulvqwap563y" path="res://Card.tscn" id="2_un5mh"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -32,9 +31,6 @@ offset_left = 429.0
 offset_top = 204.0
 offset_right = 729.0
 offset_bottom = 592.0
-
-[node name="Card" parent="CardContainer" instance=ExtResource("2_un5mh")]
-layout_mode = 1
 
 [node name="ResultLabel" type="Label" parent="."]
 layout_mode = 0
