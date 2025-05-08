@@ -1,18 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgulvqwap563y"]
 
 [ext_resource type="Script" path="res://Card.gd" id="1_aeaxc"]
-[ext_resource type="Texture2D" uid="uid://dl5an5ud2lmyn" path="res://Smiley1.png" id="2_hlw1k"]
+[ext_resource type="Texture2D" uid="uid://b1q3dwfcxshnp" path="res://BasicCard.png" id="2_2v2hd"]
 
 [node name="Card" type="Control"]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.469
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.469
-offset_left = -16.0
-offset_top = -128.912
-offset_right = 24.0
-offset_bottom = -84.912
+anchor_bottom = 0.5
+offset_left = -269.0
+offset_top = -232.0
+offset_right = 275.0
+offset_bottom = 226.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -22,37 +23,46 @@ script = ExtResource("1_aeaxc")
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.325
-anchor_top = 1.0
-anchor_right = 0.325
-anchor_bottom = 1.0
-offset_left = -54.0
-offset_top = 16.0
-offset_right = 54.0
-offset_bottom = 134.0
-texture = ExtResource("2_hlw1k")
+anchor_left = 0.501838
+anchor_top = 0.542576
+anchor_right = 0.501838
+anchor_bottom = 0.542576
+offset_left = -147.0
+offset_top = -233.5
+offset_right = 147.0
+offset_bottom = 233.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2v2hd")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TitleLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = -60.0
-offset_top = -97.0
-offset_right = 73.0
-offset_bottom = -74.0
+layout_mode = 2
+offset_left = 167.0
+offset_top = 31.0
+offset_right = 392.0
+offset_bottom = 68.0
+text = "yo"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="DescLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = -73.0
-offset_top = -37.0
-offset_right = 123.0
-offset_bottom = -14.0
+layout_mode = 2
+offset_left = 140.0
+offset_top = 352.0
+offset_right = 413.0
+offset_bottom = 482.0
 text = "Join the latest viral trend!"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="ButtonContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = -45.0
-offset_top = 296.0
-offset_right = 75.0
-offset_bottom = 336.0
+layout_mode = 2
+offset_left = 76.0
+offset_top = 504.0
+offset_right = 196.0
+offset_bottom = 535.0
 
 [node name="AcceptButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2

@@ -60,7 +60,16 @@ func generate_new_card():
 	card.swipe_rejected.connect(_on_card_rejected)
 	current_card = card
 
+func flash_glow(is_accept: bool):
+	var glow = $AcceptGlow if is_accept else $RejectGlow
+	var tween = get_tree().create_tween()
+	glow.modulate.a = 0.0
+	tween.tween_property(glow, "modulate:a", 1.0, 0.1) # Fade in
+	tween.tween_interval(0.1)
+	tween.tween_property(glow, "modulate:a", 0.0, 0.2) # Fade out
+
 func _on_card_accepted(card_data):
+	flash_glow(true)
 	var score = evaluate_card(card_data)
 	var quality = card_data.quality_score
 
@@ -83,6 +92,7 @@ func _on_card_accepted(card_data):
 	generate_new_card()
 
 func _on_card_rejected(card_data):
+	flash_glow(false)
 	var score = evaluate_card(card_data)
 	if score < 50:  # Adjust this threshold as needed
 		result_label.text = "🚫 Good call. That post would’ve flopped!"
