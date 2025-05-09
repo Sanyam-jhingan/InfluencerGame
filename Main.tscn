@@ -26,7 +26,7 @@ alignment = 1
 
 [node name="FollowerLabel" type="Label" parent="FollowerPanel"]
 layout_mode = 2
-text = "99"
+text = "999"
 
 [node name="EngagementLabel" type="Label" parent="FollowerPanel"]
 layout_mode = 2
@@ -78,3 +78,23 @@ offset_top = 136.0
 offset_right = 22.0
 offset_bottom = 779.0
 color = Color(1, 0, 0, 0.47451)
+
+[node name="RebrandButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 2.0
+offset_right = 523.0
+offset_bottom = 44.0
+text = "Rebrand"
+
+[node name="RebrandConfirm" type="ConfirmationDialog" parent="."]
+
+[node name="RebrandHintPopup" type="Popup" parent="."]
+title = "Rebrand?"
+size = Vector2i(355, 257)
+
+[node name="RebrandHintLabel" type="Label" parent="RebrandHintPopup"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "sadfadsgdsgdsgdsgadsgdsgdsgdsgdsgadsgdsg"
+vertical_alignment = 1

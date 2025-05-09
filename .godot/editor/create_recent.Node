@@ -1,8 +1,10 @@
+Label
+Popup
+ConfirmationDialog
+Button
 ColorRect
 CenterContainer
-Button
 HBoxContainer
-Label
 TextureRect
 Control
 VBoxContainer
