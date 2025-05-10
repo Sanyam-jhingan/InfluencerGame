@@ -12,7 +12,7 @@ var followers = 100
 var engagement = 10.0
 var current_card = null
 
-# Prestige System: Rebranding
+# Prestige System
 var rebrand_tokens = 0
 var rebrand_available = false
 var rebrand_engagement_streak = 0
@@ -30,11 +30,13 @@ var algorithm_timer := Timer.new()
 var brand_deals = []
 var active_deal = null
 
+# Auto-Play AI
+var auto_play_enabled := true
+
 func _ready():
 	update_stats()
 	generate_new_card()
 
-	# Setup algorithm timer
 	add_child(algorithm_timer)
 	algorithm_timer.wait_time = 30
 	algorithm_timer.autostart = true
@@ -44,10 +46,14 @@ func _ready():
 	rebrand_button.disabled = false
 	rebrand_button.pressed.connect(_on_rebrand_pressed)
 
+func toggle_auto_play():
+	auto_play_enabled = !auto_play_enabled
+	print("Auto-play: ", auto_play_enabled)
+
 func update_stats():
 	follower_label.text = "Followers: %d" % followers
 	engagement_label.text = "Engagement: %.1f%%" % engagement
-	rebrand_button.disabled = not check_rebrand_conditions()
+	rebrand_button.disabled = false
 
 func generate_new_card():
 	if current_card and is_instance_valid(current_card):
@@ -67,6 +73,28 @@ func generate_new_card():
 	card.swipe_accepted.connect(_on_card_accepted)
 	card.swipe_rejected.connect(_on_card_rejected)
 	current_card = card
+
+	if auto_play_enabled:
+		await get_tree().create_timer(0.5).timeout
+		_autoplay_decide(card.card_data)
+
+func _autoplay_decide(card_data):
+	if not current_card or not is_instance_valid(current_card):
+		return
+
+	var score = evaluate_card(card_data)
+
+	# Predict the result text that would appear if accepted
+	var would_be_result := get_result_text(score, card_data)
+
+	# Accept only if the result would be a "great choice"
+	var should_accept := would_be_result == "👍 Great choice!"
+
+	if should_accept:
+		current_card.accept()
+	else:
+		current_card.reject()
+
 
 func flash_glow(is_accept: bool):
 	var glow = $AcceptGlow if is_accept else $RejectGlow
@@ -127,6 +155,13 @@ func evaluate_card(card_data):
 	if card_data.content_type == FavoredContent.keys()[current_favored]:
 		base_score *= 1.5
 	return base_score
+	
+func get_result_text(score: float, card_data: Dictionary) -> String:
+	var quality = card_data.quality_score
+	if quality > 0.4:
+		return "👍 Great choice!"
+	else:
+		return "⚠️ Low-quality post! You lost followers."
 
 # ----- Brand Deal System -----
 
@@ -164,16 +199,12 @@ func check_rebrand_conditions() -> bool:
 
 func show_rebrand_hint():
 	var reasons = []
-
 	if followers < REBRAND_FOLLOWER_REQUIREMENT:
 		reasons.append("- Reach at least %d followers (you have %d)" % [REBRAND_FOLLOWER_REQUIREMENT, followers])
-
 	if active_deal != null:
 		reasons.append("- Complete your current brand deal with %s" % active_deal.brand)
-
 	if rebrand_tokens < 1:
 		reasons.append("- Earn at least 1 Rebrand Token by keeping high engagement on multiple good posts")
-
 	var hint_text = "You can't Rebrand yet:\n\n" + "\n".join(reasons)
 	$RebrandHintPopup/RebrandHintLabel.text = hint_text
 	$RebrandHintPopup.popup_centered()
@@ -190,8 +221,5 @@ func _on_rebrand_pressed():
 	brand_deal_completed = false
 	rebrand_engagement_streak = 0
 	result_label.text = "🔄 You rebranded! Growth bonuses applied."
-
-	# Apply prestige bonuses (placeholder - customize later)
-	# Example: +10% permanent follower gain multiplier (not yet implemented)
 	update_stats()
 	generate_new_card()

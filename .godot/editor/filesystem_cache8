@@ -1,10 +1,11 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1746760616
+::res://::1746837438
 BasicCard.png::CompressedTexture2D::4246067258886122981::1746581113::1746581114::1::::<><>::
 Card.gd::GDScript::-1::1746660466::0::1::::<>Control<>::
-Card.tscn::PackedScene::2849547563575485228::1746665265::0::1::::<><>::res://Card.gd<>uid://b1q3dwfcxshnp::::res://BasicCard.png
-Fade.gdshader::Shader::-1::1746665805::0::1::::<><>::
+Card.tscn::PackedScene::2849547563575485228::1746763884::0::1::::<><>::res://Card.gd<>uid://b1q3dwfcxshnp::::res://BasicCard.png
+Fade.gdshader::Shader::-1::1746766262::0::1::::<><>::
 icon.svg::CompressedTexture2D::5994517747582292155::1746576408::1746576413::1::::<><>::
-Main.gd::GDScript::-1::1746659932::0::1::::<>Control<>::
-Main.tscn::PackedScene::8215898747102228272::1746665265::0::1::::<><>::res://Main.gd
+Main.gd::GDScript::-1::1746763856::0::1::::<>Control<>::
+Main.tscn::PackedScene::8215898747102228272::1746763884::0::1::::<><>::res://Main.gd
+RebrandManager.gd::GDScript::-1::1746762885::0::1::::<>Node<>::
 Smiley1.png::CompressedTexture2D::7993295485809643349::1746577560::1746577560::1::::<><>::
