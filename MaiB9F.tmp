@@ -1,0 +1,103 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpb3wfyql7057"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_yxygk"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yxygk")
+
+[node name="FollowerPanel" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -9.5
+offset_right = 9.5
+offset_bottom = 50.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="FollowerLabel" type="Label" parent="FollowerPanel"]
+layout_mode = 2
+text = "999"
+
+[node name="EngagementLabel" type="Label" parent="FollowerPanel"]
+layout_mode = 2
+text = "10"
+
+[node name="CardContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.0
+offset_top = -194.0
+offset_right = 268.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResultLabel" type="Label" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -160.0
+offset_right = 107.0
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceptGlow" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 518.0
+offset_top = 127.0
+offset_right = 538.0
+offset_bottom = 775.0
+color = Color(0, 1, 0, 0.486275)
+
+[node name="RejectGlow" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 136.0
+offset_right = 22.0
+offset_bottom = 779.0
+color = Color(1, 0, 0, 0.47451)
+
+[node name="RebrandButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 2.0
+offset_right = 523.0
+offset_bottom = 44.0
+text = "Rebrand"
+
+[node name="RebrandConfirm" type="ConfirmationDialog" parent="."]
+
+[node name="RebrandHintPopup" type="Popup" parent="."]
+title = "Rebrand?"
+size = Vector2i(400, 200)
+min_size = Vector2i(400, 200)
+
+[node name="RebrandHintLabel" type="Label" parent="RebrandHintPopup"]
+custom_minimum_size = Vector2(400, 200)
+offset_right = 40.0
+offset_bottom = 23.0
+size_flags_vertical = 6
+text = "sadfadsgdsgdsgdsgadsgdsgdsgdsgdsgadsgdsg"
+autowrap_mode = 2

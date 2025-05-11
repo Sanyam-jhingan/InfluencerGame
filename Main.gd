@@ -83,18 +83,19 @@ func _autoplay_decide(card_data):
 		return
 
 	var score = evaluate_card(card_data)
+	var quality = card_data.quality_score
 
-	# Predict the result text that would appear if accepted
-	var would_be_result := get_result_text(score, card_data)
+	card_data.cached_score = score
+	card_data.cached_quality = quality
 
-	# Accept only if the result would be a "great choice"
-	var should_accept := would_be_result == "👍 Great choice!"
+	var predicted = get_result_text(score, card_data)
 
+	var should_accept = predicted in ["🔥 Viral hit!", "👍 Great choice!"] and quality > 0.4
+	print("AI decision — score:", score, "quality:", quality, "predicted:", predicted)
 	if should_accept:
 		current_card.accept()
 	else:
 		current_card.reject()
-
 
 func flash_glow(is_accept: bool):
 	var glow = $AcceptGlow if is_accept else $RejectGlow
@@ -106,13 +107,14 @@ func flash_glow(is_accept: bool):
 
 func _on_card_accepted(card_data):
 	flash_glow(true)
-	var score = evaluate_card(card_data)
-	var quality = card_data.quality_score
+	var score = card_data.get("cached_score", evaluate_card(card_data))
+	var quality = card_data.get("cached_quality", card_data.get("quality_score"))
 
 	if quality > 0.4:
 		followers += int(score * quality)
 		engagement += randf_range(0.1, 1.0) * quality
-		result_label.text = "👍 Great choice!"
+		result_label.text = get_result_text(score, card_data)
+
 		if engagement >= REQUIRED_ENGAGEMENT_THRESHOLD:
 			rebrand_engagement_streak += 1
 			if rebrand_engagement_streak >= REQUIRED_ENGAGEMENT_STREAK:
@@ -123,17 +125,19 @@ func _on_card_accepted(card_data):
 		followers -= int((1.0 - quality) * 50)
 		engagement -= randf_range(0.3, 1.0) * (1.0 - quality)
 		rebrand_engagement_streak = 0
-		result_label.text = "⚠️ Low-quality post! You lost followers."
+		result_label.text = get_result_text(score, card_data) # Use consistent tone
 
 	if active_deal and FavoredContent.has(card_data.content_type) and FavoredContent[card_data.content_type] == active_deal.requirement:
 		complete_brand_deal()
+	print("Final accepted — score:", score, "quality:", quality, "result:", result_label.text)
 
 	update_stats()
 	generate_new_card()
 
 func _on_card_rejected(card_data):
 	flash_glow(false)
-	var score = evaluate_card(card_data)
+	var score = card_data.get("cached_score", evaluate_card(card_data))
+	var quality = card_data.get("cached_quality", card_data.get("quality_score"))
 	if score < 50:
 		result_label.text = "🚫 Good call. That post would’ve flopped!"
 	else:
@@ -141,6 +145,7 @@ func _on_card_rejected(card_data):
 		followers -= int(card_data.risk * 5)
 		engagement -= randf_range(0.2, 0.5)
 		rebrand_engagement_streak = 0
+	print("Final accepted — score:", score, "quality:", quality, "result:", result_label.text)
 
 	update_stats()
 	generate_new_card()
@@ -156,12 +161,20 @@ func evaluate_card(card_data):
 		base_score *= 1.5
 	return base_score
 	
-func get_result_text(score: float, card_data: Dictionary) -> String:
+func get_result_text(score, card_data):
 	var quality = card_data.quality_score
-	if quality > 0.4:
-		return "👍 Great choice!"
-	else:
+
+	if quality < 0.4:
 		return "⚠️ Low-quality post! You lost followers."
+	elif score > 400:
+		return "🔥 Viral hit!"
+	elif score > 200:
+		return "👍 Great choice!"
+	elif score > 100:
+		return "👌 Okay post."
+	else:
+		return "👎 Missed opportunity."
+
 
 # ----- Brand Deal System -----
 
